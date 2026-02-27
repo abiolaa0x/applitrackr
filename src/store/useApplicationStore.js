@@ -1,68 +1,70 @@
+import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
-import {v4 as uuidv4} from "uuid"
+import { persist } from "zustand/middleware";
 
-const loadFromStorage = () => {
-  try {
-    const stored = localStorage.getItem("applications");
-    return stored ? JSON.parse(stored) : [];
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
+export const useApplicationStore = create(
+  persist(
+    (set, get) => ({
+      applications: [],
 
-const saveToStorage = (applications) => {
-  localStorage.setItem("applications", JSON.stringify(applications));
-};
+      // create application
+      addApplication: (application) =>
+        set((state) => ({
+          applications: [
+            ...state.applications,
+            {
+              id: uuidv4(),
+              company: application.company,
+              role: application.role,
+              status: application.status,
+              appliedDate: application.appliedDate,
+              jobType: application.jobType || "full-time",
+              jobUrl: application.jobUrl || "",
+              updates: [],
+            },
+          ],
+        })),
 
-export const useApplicationStore = create((set, get) => ({
-  applications: loadFromStorage(),
+      // update application
+      updateApplication: (id, updatedFields) =>
+        set((state) => ({
+          applications: state.applications.map((app) =>
+            app.id === id ? { ...app, ...updatedFields } : app,
+          ),
+        })),
 
-  addApplication: (data) => {
-    const newApplication = {
-      id: uuidv4(),
-      role: data.role,
-      company: data.company,
-      appliedDate: data.appliedDate,
-      link: data.link || "",
-      status: data.status || "applied",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+      // delete application
+      deleteApplication: (id) =>
+        set((state) => ({
+          applications: state.applications.filter((app) => app.id !== id),
+        })),
 
-    const updatedApps = [...get().applications, newApplication];
+      // get single application
+      getApplicationById: (id) =>
+        get().applications.find((app) => app.id === id),
 
-    saveToStorage(updatedApps);
-
-    set({ applications: updatedApps });
-  },
-
-  updateApplication: (id, updates) => {
-    const updatedApps = get().applications.map((app) =>
-      app.id === id ?
-        {
-          ...app,
-          ...updates,
-          updatedAt: new Date().toISOString(),
-        }
-      : app,
-    );
-
-    saveToStorage(updatedApps);
-
-    set({ applications: updatedApps });
-  },
-
-  deleteApplication: (id) => {
-    const updatedApps = get().applications.filter((app) => app.id !== id);
-
-    saveToStorage(updatedApps);
-
-    set({ applications: updatedApps });
-  },
-
-  getApplicationById: (id) => {
-    return get().applications.find((app) => app.id === id);
-  },
-
-}));
+      // add update (activity log entry)
+      addUpdate: (applicationId, text) =>
+        set((state) => ({
+          applications: state.applications.map((app) =>
+            app.id === applicationId ?
+              {
+                ...app,
+                updates: [
+                  {
+                    id: uuidv4(),
+                    text,
+                    createdAt: new Date().toISOString(),
+                  },
+                  ...app.updates, // newest first
+                ],
+              }
+            : app,
+          ),
+        })),
+    }),
+    {
+      name: "job-applications-storage",
+    },
+  ),
+);
