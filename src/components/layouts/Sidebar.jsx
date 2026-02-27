@@ -1,9 +1,9 @@
 const Sidebar = () => {
   return (
-    <aside className="w-65 bg-white border-r border-slate-200 min-h-screen p-6">
+    <aside className="w-85 bg-white border-r border-slate-200 min-h-screen p-6">
       
       <h1 className="text-xl font-bold text-slate-800 mb-8">
-        Applitrackr
+        applitrackr.
       </h1>
 
       <nav className="space-y-2">
