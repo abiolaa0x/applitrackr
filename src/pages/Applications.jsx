@@ -109,7 +109,7 @@ const Applications = () => {
       appearance-none
       text-sm font-medium
       pl-4 pr-9 py-2
-      rounded-full
+      rounded-md
       border border-slate-200
       bg-white
       text-slate-700
@@ -134,7 +134,7 @@ const Applications = () => {
                   {/* Custom Arrow */}
                   <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                     <svg
-                      className="w-3.5 h-3.5 text-slate-400"
+                      className="w-8 h-8 text-slate-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -268,7 +268,7 @@ const Applications = () => {
           <ApplicationForm onClose={() => setIsAddOpen(false)} />
         </Modal>
 
-        {/* DELETE MODAL (Styled Like Screenshot) */}
+        {/* Delete Modal */}
         <Modal isOpen={!!deleteTarget} onClose={() => setDeleteTarget(null)}>
           <div className=" bg-white rounded-2xl shadow-xl p-8 text-center">
             <div className="flex justify-center mb-5">

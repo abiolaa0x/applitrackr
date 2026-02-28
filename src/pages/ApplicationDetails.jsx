@@ -116,7 +116,7 @@ const ApplicationDetails = () => {
                           status: e.target.value,
                         })
                       }
-                      className="appearance-none text-sm font-medium pl-4 pr-9 py-1.5 rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 cursor-pointer"
+                      className="appearance-none text-sm font-medium pl-4 pr-9 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 cursor-pointer"
                     >
                       <option value="applied">Applied</option>
                       <option value="interviewing">Interviewing</option>
@@ -125,9 +125,9 @@ const ApplicationDetails = () => {
                     </select>
 
                     {/* Custom Arrow */}
-                    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                    <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center">
                       <svg
-                        className="w-3.5 h-3.5 text-slate-400"
+                        className="w-8 h-8 text-slate-400"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -233,7 +233,7 @@ const ApplicationDetails = () => {
           />
         </Modal>
 
-        {/* DELETE MODAL (Styled Like Screenshot) */}
+        {/* Delete Modal*/}
         <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
           {" "}
           <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
