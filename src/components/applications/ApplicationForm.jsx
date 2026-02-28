@@ -16,6 +16,8 @@ const ApplicationForm = ({ mode = "create", application = null, onClose }) => {
     appliedDate: application?.appliedDate || "",
     jobType: application?.jobType || "full-time",
     jobUrl: application?.jobUrl || "",
+    location: application?.location || "",
+    salary: application?.salary || "",
   });
 
   const handleChange = (e) => {
@@ -87,17 +89,49 @@ const ApplicationForm = ({ mode = "create", application = null, onClose }) => {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Application Status
           </label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="w-full border border-slate-200 rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-          >
-            <option value="applied">Applied</option>
-            <option value="interviewing">Interviewing</option>
-            <option value="offer">Offer</option>
-            <option value="rejected">Rejected</option>
-          </select>
+          <div className="relative">
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="
+      appearance-none
+      w-full
+      pl-4 pr-10 py-2.5
+      rounded-md
+      border border-slate-200
+      bg-white
+      text-sm text-slate-700
+      shadow-sm
+      transition-all duration-150
+      hover:border-indigo-300
+      focus:outline-none
+      focus:ring-2 focus:ring-indigo-500/40
+      focus:border-indigo-400
+      cursor-pointer
+    "
+            >
+              <option value="applied">Applied</option>
+              <option value="interviewing">Interviewing</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+              <svg
+                className="w-4 h-4 text-slate-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Applied Date */}
@@ -120,17 +154,79 @@ const ApplicationForm = ({ mode = "create", application = null, onClose }) => {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Job Type
           </label>
-          <select
-            name="jobType"
-            value={formData.jobType}
+          <div className="relative">
+            <select
+              name="jobType"
+              value={formData.jobType}
+              onChange={handleChange}
+              className="
+      appearance-none
+      w-full
+      pl-4 pr-10 py-2.5
+      rounded-md
+      border border-slate-200
+      bg-white
+      text-sm text-slate-700
+      shadow-sm
+      transition-all duration-150
+      hover:border-indigo-300
+      focus:outline-none
+      focus:ring-2 focus:ring-indigo-500/40
+      focus:border-indigo-400
+      cursor-pointer
+    "
+            >
+              <option value="full-time">Full-time</option>
+              <option value="contract">Contract</option>
+              <option value="internship">Internship</option>
+              <option value="freelance">Freelance</option>
+            </select>
+
+            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+              <svg
+                className="w-4 h-4 text-slate-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Location
+          </label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
             onChange={handleChange}
+            placeholder="e.g. London, Remote"
             className="w-full border border-slate-200 rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-          >
-            <option value="full-time">Full-time</option>
-            <option value="contract">Contract</option>
-            <option value="internship">Internship</option>
-            <option value="freelance">Freelance</option>
-          </select>
+          />
+        </div>
+
+        {/* Salary */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Salary (Optional)
+          </label>
+          <input
+            type="text"
+            name="salary"
+            value={formData.salary}
+            onChange={handleChange}
+            placeholder="e.g. $120,000 / £70k"
+            className="w-full border border-slate-200 rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          />
         </div>
 
         {/* Job URL */}

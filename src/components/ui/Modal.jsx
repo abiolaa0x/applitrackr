@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
       {/* Modal Panel */}
-      <div className="relative bg-white w-full max-w-4xl mx-4 rounded-lg shadow-lg border border-slate-200">
+      <div className="relative bg-white w-full max-w-3xl mx-4 rounded-lg shadow-lg border border-slate-200">
         {children}
       </div>
     </div>

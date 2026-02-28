@@ -20,6 +20,8 @@ export const useApplicationStore = create(
               appliedDate: application.appliedDate,
               jobType: application.jobType || "full-time",
               jobUrl: application.jobUrl || "",
+              location: application.location || "",
+              salary: application.salary || "",
               updates: [],
             },
           ],

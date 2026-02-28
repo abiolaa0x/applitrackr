@@ -8,7 +8,7 @@ const StatusBadge = ({ status }) => {
 
   return (
     <span
-      className={`px-5 py-1 text-xs font-medium rounded-full ${styles[status]}`}
+      className={`px-5 py-1.5 text-sm font-medium rounded-md ${styles[status]}`}
     >
       {status.charAt(0).toUpperCase() + status.slice(1)}
     </span>

@@ -101,25 +101,61 @@ const Applications = () => {
             {/* FILTER + SEARCH */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <select
-                  value={selectedStatus}
-                  onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="px-4 py-2 bg-white border border-slate-200 rounded-md text-xs text-slate-600 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  <option value="">All Status</option>
-                  {uniqueStatuses.map((status) => (
-                    <option key={status} value={status}>
-                      {formatStatusLabel(status)}
-                    </option>
-                  ))}
-                </select>
+                <div className="relative inline-block">
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="
+      appearance-none
+      text-sm font-medium
+      pl-4 pr-9 py-2
+      rounded-full
+      border border-slate-200
+      bg-white
+      text-slate-700
+      shadow-sm
+      transition-all duration-150
+      hover:border-indigo-300
+      hover:shadow
+      focus:outline-none
+      focus:ring-2 focus:ring-indigo-500/40
+      focus:border-indigo-400
+      cursor-pointer
+    "
+                  >
+                    <option value="">All Status</option>
+                    {uniqueStatuses.map((status) => (
+                      <option key={status} value={status}>
+                        {formatStatusLabel(status)}
+                      </option>
+                    ))}
+                  </select>
 
-                <button
-                  onClick={clearFilters}
-                  className="text-sm text-slate-500 hover:text-slate-700 transition"
-                >
-                  Clear all
-                </button>
+                  {/* Custom Arrow */}
+                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                    <svg
+                      className="w-3.5 h-3.5 text-slate-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                {(searchTerm.length > 0 || selectedStatus !== "") && (
+                  <button
+                    onClick={clearFilters}
+                    className="text-sm text-slate-500 hover:text-slate-700 transition"
+                  >
+                    Clear all
+                  </button>
+                )}
               </div>
 
               <div className="relative">
@@ -135,8 +171,6 @@ const Applications = () => {
                 </span>
               </div>
             </div>
-
-            <div className="border-b border-slate-200 mb-6"></div>
 
             {/* NO RESULTS */}
             {isSearchEmpty ?
@@ -236,7 +270,7 @@ const Applications = () => {
 
         {/* DELETE MODAL (Styled Like Screenshot) */}
         <Modal isOpen={!!deleteTarget} onClose={() => setDeleteTarget(null)}>
-          <div className="w-105 bg-white rounded-2xl shadow-xl p-8 text-center">
+          <div className=" bg-white rounded-2xl shadow-xl p-8 text-center">
             <div className="flex justify-center mb-5">
               <div className="w-14 h-14 flex items-center justify-center rounded-full bg-red-100">
                 <svg
