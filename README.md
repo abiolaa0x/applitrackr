@@ -1,16 +1,115 @@
-# React + Vite
+# AppliTrackr
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AppliTrackr is a modern job application tracking web app built with React and Tailwind CSS.  
+It helps users manage applications, track updates, and identify when follow-ups are needed.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+### 📌 Application Management
+- Add, edit, and delete job applications
+- Track company, role, location, salary, and job type
+- Update application status (Applied, Interviewing, Offer, Rejected)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🕒 Activity Timeline
+- Add updates to applications
+- Visual timeline with activity history
+- Smart UI interactions (conditional buttons, clean indicators)
 
-## Expanding the ESLint configuration
+### 🔔 Follow-Up Reminders
+- Automatically detects applications with no activity for 7+ days
+- Helps prevent forgotten opportunities
+- Clean, actionable table layout
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📊 Modern UI
+- Built with Tailwind CSS
+- Responsive layout
+- Custom select dropdown styling
+- Reusable components (Modal, StatusBadge, Layout)
+
+### 🚧 Upcoming
+- Contacts management system (Coming Soon)
+- Enhanced metrics and analytics
+- Customizable follow-up thresholds
+
+---
+
+## 🧠 Follow-Up Logic
+
+An application appears in the **Follow-Ups** page if:
+
+- It has **no updates**, OR  
+- Its latest update is **7 or more days old**
+
+This helps users quickly identify stagnant applications that may require outreach or action.
+
+---
+
+## 🛠 Tech Stack
+
+- React
+- React Router
+- Zustand (state management)
+- Tailwind CSS
+- Local storage persistence
+
+---
+
+## 📂 Project Structure
+src/
+│
+├── components/
+│ ├── layouts/
+│ ├── applications/
+│ └── ui/
+│
+├── pages/
+│ ├── Applications.jsx
+│ ├── ApplicationDetails.jsx
+│ ├── FollowUps.jsx
+│ └── Contacts.jsx
+│
+├── store/
+│ └── useApplicationStore.js
+│
+└── utils/
+└── formatDate.js
+
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+git clone https://github.com/yourusername/applitrackr.git
+
+
+### 2. Install dependencies
+npm install
+
+
+### 3. Start development server
+npm run dev
+
+
+---
+
+## 🎯 Purpose
+
+AppliTrackr was built as a capstone-style project to demonstrate:
+
+- Clean component architecture
+- State management patterns
+- UX-focused thinking
+- Real-world product logic implementation
+
+---
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+Built with intention.
