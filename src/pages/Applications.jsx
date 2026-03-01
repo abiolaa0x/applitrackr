@@ -93,7 +93,7 @@ const Applications = () => {
                 onClick={() => setIsAddOpen(true)}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-md font-medium shadow-sm transition"
               >
-                + Add Application
+                Create Application
               </button>
             </div>
           </div>
@@ -108,7 +108,7 @@ const Applications = () => {
                     className="
       appearance-none
       text-sm font-medium
-      pl-4 pr-9 py-2
+      pl-4 pr-12 py-2
       rounded-md
       border border-slate-200
       bg-white

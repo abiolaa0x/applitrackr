@@ -126,8 +126,8 @@ const Landing = () => {
 const FeatureCard = ({ title, description }) => {
   return (
     <div className="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
-      <h4 className="text-lg font-semibold mb-3">{title}</h4>
-      <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
+      <h4 className="text-2xl font-bold text-center mb-3">{title}</h4>
+      <p className="text-slate-500 text-center text-sm leading-relaxed">{description}</p>
     </div>
   );
 };

@@ -28,6 +28,7 @@ const ApplicationDetails = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [newUpdate, setNewUpdate] = useState("");
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   if (!application) {
     return (
@@ -84,7 +85,7 @@ const ApplicationDetails = () => {
         <div className="bg-white border border-slate-200 rounded-lg p-8 shadow-sm mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-5">
-              <div className="w-34 h-34 rounded-[10px] bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl font-semibold">
+              <div className="w-34 h-34 rounded-[10px] bg-indigo-100 text-indigo-600 flex items-center justify-center text-4xl font-semibold">
                 {avatarLetter}
               </div>
 
@@ -116,7 +117,7 @@ const ApplicationDetails = () => {
                           status: e.target.value,
                         })
                       }
-                      className="appearance-none text-sm font-medium pl-4 pr-9 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 cursor-pointer"
+                      className="appearance-none text-sm font-medium pl-4 pr-2 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-400 cursor-pointer"
                     >
                       <option value="applied">Applied</option>
                       <option value="interviewing">Interviewing</option>
@@ -125,7 +126,7 @@ const ApplicationDetails = () => {
                     </select>
 
                     {/* Custom Arrow */}
-                    <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center">
+                    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                       <svg
                         className="w-8 h-8 text-slate-400"
                         xmlns="http://www.w3.org/2000/svg"
@@ -176,35 +177,59 @@ const ApplicationDetails = () => {
           <textarea
             value={newUpdate}
             onChange={(e) => setNewUpdate(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => {
+              if (!newUpdate.trim()) setIsFocused(false);
+            }}
             rows={3}
             placeholder="Write an update about this application..."
-            className="w-full border border-slate-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full border border-slate-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
 
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={handleAddUpdate}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm"
-            >
-              Add Update
-            </button>
-          </div>
+          {isFocused && (
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => {
+                  handleAddUpdate();
+                  setIsFocused(false);
+                }}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm transition"
+              >
+                Add Update
+              </button>
+            </div>
+          )}
         </div>
-
         {/* Timeline */}
         <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm mb-8">
           <h3 className="text-lg font-semibold mb-6">Activity</h3>
 
           {application.updates && application.updates.length > 0 ?
-            <div className="space-y-6">
-              {application.updates.map((update) => (
-                <div key={update.id} className="relative pl-6">
-                  <p className="text-slate-700 text-sm">{update.content}</p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {formatDate(update.createdAt)}
-                  </p>
-                </div>
-              ))}
+            <div className="relative">
+              {/* Vertical Line */}
+              <div className="absolute left-2 top-0 bottom-0 w-px bg-slate-200"></div>
+
+              <div className="space-y-8">
+                {[...application.updates]
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .map((update) => (
+                    <div key={update.id} className="relative pl-8">
+                      {/* Dot */}
+                      <div className="absolute left-0 top-1.5 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-sm"></div>
+
+                      {/* Content */}
+                      <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                        <p className="text-sm text-slate-700">
+                          {update.content}
+                        </p>
+
+                        <p className="text-xs text-slate-400 mt-2">
+                          {formatDate(update.createdAt)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           : <p className="text-sm text-slate-400">No activity yet.</p>}
         </div>
